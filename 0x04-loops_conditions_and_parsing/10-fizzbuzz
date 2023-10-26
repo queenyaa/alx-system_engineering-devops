@@ -4,19 +4,14 @@
 v=1
 while [ $v -le 100 ]; do
 	if ((v % 3 == 0)) && ((v % 5 == 0)); then
-		echo -n "FizzBuzz"
+		echo "FizzBuzz"
 	elif ((v % 3 == 0)); then
-		echo -n "Fizz"
+		echo "Fizz"
 	elif ((v % 5 == 0)); then
-		echo -n "Buzz"
+		echo "Buzz"
 	else
-		echo -n "$v"
-	fi
-
-	if [ $v -ne 100 ]; then
-		echo -n " "
+		echo "$v"
 	fi
 
 	v=$((v + 1))
 done
-echo
