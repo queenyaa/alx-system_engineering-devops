@@ -362,4 +362,64 @@ Task 5 demonstrates how to create a Bash script that can find and stop a specifi
 ---
 
 
+---
+
+# Task 6: Bash Script to Stop the "4-to-infinity-and-beyond" Process
+========================================================================
+
+## Introduction
+
+In Task 6, the objective is to create a Bash script that stops the "4-to-infinity-and-beyond" process without using the `kill` or `killall` commands. This script is designed to find and terminate the specified process gracefully.
+
+## Script Description
+
+The Bash script for this task, named `6-stop_me_if_you_can`, performs the following actions:
+
+1. It uses the `pkill` command with the `-f` option to find the PID of the "4-to-infinity-and-beyond" process. The `-f` option allows for searching using the full command line.
+
+2. It checks if a valid PID was found. If a PID is found, it means that the "4-to-infinity-and-beyond" process is running.
+
+3. If a valid PID is found, it prints a message indicating the termination of the process.
+
+4. The script then attempts to terminate the process by using the `pkill` command with the `-P` option, which allows it to terminate all child processes of the specified parent PID.
+
+5. If a valid PID is not found, the script displays a message indicating that the "4-to-infinity-and-beyond" process was not found.
+
+This script provides a method to gracefully terminate the "4-to-infinity-and-beyond" process without using the `kill` or `killall` commands.
+
+## Usage
+
+To use the script to stop the "4-to-infinity-and-beyond" process, follow these steps:
+
+1. Open a terminal on your system.
+
+2. Make sure the script file (`6-stop_me_if_you_can`) is in the current directory.
+
+3. Ensure the script file is executable by running the following command:
+   ```bash
+   chmod +x 6-stop_me_if_you_can
+   ```
+
+4. Execute the script using the following command. Make sure the "4-to-infinity-and-beyond" process is running before running this script.
+   ```bash
+   ./6-stop_me_if_you_can
+   ```
+
+5. The script will attempt to find and terminate the "4-to-infinity-and-beyond" process.
+
+## Example
+
+```shell
+sylvain@ubuntu$ ./6-stop_me_if_you_can
+sylvain@ubuntu$
+```
+
+In this example, the script successfully found and terminated the "4-to-infinity-and-beyond" process, as indicated by the "Terminated" message.
+
+## Conclusion
+
+Task 6 demonstrates how to create a Bash script that can find and stop a specific process without using the `kill` or `killall` commands. This script provides a method to gracefully terminate a process when needed, even if it has child processes.
+
+---
+
 
