@@ -419,6 +419,8 @@ In this example, the script successfully found and terminated the "4-to-infinity
 ## Conclusion
 
 Task 6 demonstrates how to create a Bash script that can find and stop a specific process without using the `kill` or `killall` commands. This script provides a method to gracefully terminate a process when needed, even if it has child processes.
+---
+
 
 ---
 
@@ -477,3 +479,193 @@ If the script doesn't handle the signal as expected in your environment, please 
 ---
 
 
+---
+
+##Task 8 Documentation: Terminating the 7-Highlander Process
+=================================================================
+
+**Description:**
+
+In Task 8, the objective is to create a Bash script named `8-beheaded_process` that terminates the `7-highlander` process. This is achieved by using the `pkill` command to identify and terminate the process with the name "7-highlander."
+
+**Script Implementation:**
+
+Here's the script implementation for `8-beheaded_process`:
+
+```bash
+#!/usr/bin/env bash
+# This script kills the 7-highlander process.
+
+# Use pkill to find and terminate the 7-highlander process
+pkill -f "7-highlander"
+```
+
+**Script Features:**
+
+1. The script utilizes the `pkill` command with the `-f` option to locate and terminate processes based on their command line arguments. It searches for processes containing the string "7-highlander" in their command lines.
+
+**Running the Script:**
+
+To use the script, follow these steps:
+
+1. Save the script to a file named `8-beheaded_process`.
+2. Make the script executable by running `chmod +x 8-beheaded_process`.
+3. Execute the script by running `./8-beheaded_process`.
+
+When you run the `8-beheaded_process` script in Terminal #1, it will use `pkill` to find and terminate the `7-highlander` process, as specified in the task. This will result in the termination of the `7-highlander` process running in Terminal #0, as demonstrated in your task example.
+
+**Note:**
+
+Be cautious when using `pkill` to terminate processes, as it can affect processes with matching command line arguments system-wide. It's recommended to use this command judiciously and verify that the process name or arguments are unique to avoid unintended terminations.
+---
+
+
+---
+
+##Task 9 Documentation: Creating a Daemon with Process Management
+======================================================================
+
+**Description:**
+
+In Task 9, you are tasked with creating a Bash script that functions as a daemon, managing its process and providing functionalities to start, stop, and restart it. The script, named `100-process_and_pid_file`, creates a PID file, writes messages to a file, and responds to specific signals.
+
+**Implementation of `100-process_and_pid_file` Script:**
+
+The `100-process_and_pid_file` script has the following functionalities:
+
+1. Creates a PID file `/var/run/myscript.pid` containing its own PID.
+2. Displays "To infinity and beyond" indefinitely.
+3. Responds to a SIGTERM signal with "I hate the kill command."
+4. Responds to a SIGINT signal with "Y U no love me?!"
+5. Deletes the PID file and terminates itself when receiving a SIGQUIT or SIGTERM signal.
+
+**Usage:**
+
+To use the script, follow these steps:
+
+1. Save the `100-process_and_pid_file` script to a file with the same name.
+2. Make the script executable by running `chmod +x 100-process_and_pid_file`.
+3. Execute the script as a superuser using `sudo ./100-process_and_pid_file`.
+
+**Example Usage:**
+
+- `sudo ./100-process_and_pid_file` starts the daemon, creating the PID file and continuously displaying "To infinity and beyond."
+- When you send a SIGTERM signal (e.g., with Ctrl+C), the script responds with "I hate the kill command."
+- When you send a SIGINT signal (e.g., with Ctrl+C), the script responds with "Y U no love me?!"
+- Upon termination, the script deletes the PID file and exits.
+
+This script demonstrates the creation of a simple daemon process, its response to signals, and its self-management.
+
+**Note:**
+
+The script does not handle cases where it checks if the process is already running before starting. In this script, it will create a new process each time it's started, rather than indicating that it's already running. This implementation is provided for educational purposes to illustrate daemon process management and signal handling.
+---
+
+
+---
+
+##Task 10 Documentation: Managing Processes with Init Script
+======================================================================
+
+**Description:**
+
+In Task 10, you are required to create two Bash scripts: `manage_my_process` and `101-manage_my_process`. These scripts enable you to manage a background process (`manage_my_process`) that indefinitely writes "I am alive!" to a file with a 2-second pause between messages. The `101-manage_my_process` script acts as an init script to control the behavior of `manage_my_process`, allowing you to start, stop, or restart it, and managing the process ID.
+
+**Implementation of `manage_my_process` Script:**
+
+The `manage_my_process` script performs the following tasks:
+
+1. Creates a PID file `/var/run/my_process.pid` containing its own PID.
+2. Handles the SIGTERM signal by cleaning up and exiting.
+3. Continuously writes "I am alive!" to the file `/tmp/my_process` with a 2-second pause between messages.
+
+**Implementation of `101-manage_my_process` Init Script:**
+
+The `101-manage_my_process` init script allows you to control the behavior of `manage_my_process`. It offers the following functionalities:
+
+1. When passed the argument `start`, it starts `manage_my_process`, creates a PID file, and displays "manage_my_process started."
+2. When passed the argument `stop`, it stops `manage_my_process`, deletes the PID file, and displays "manage_my_process stopped."
+3. When passed the argument `restart`, it stops `manage_my_process`, deletes the PID file, starts `manage_my_process` again, creates a new PID file, and displays "manage_my_process restarted."
+
+**Usage:**
+
+To use the scripts, follow these steps:
+
+1. Save the `manage_my_process` script to a file named `manage_my_process`.
+2. Save the `101-manage_my_process` init script to a file named `101-manage_my_process`.
+3. Make both scripts executable by running `chmod +x manage_my_process 101-manage_my_process`.
+4. Execute the init script using `sudo ./101-manage_my_process` with one of the following arguments: `start`, `stop`, or `restart`.
+
+**Example Usage:**
+
+- `sudo ./101-manage_my_process start` starts `manage_my_process` and displays "manage_my_process started."
+- `sudo ./101-manage_my_process stop` stops `manage_my_process, deletes the PID file, and displays "manage_my_process stopped."
+- `sudo ./101-manage_my_process restart` restarts `manage_my_process and displays "manage_my_process restarted."
+
+The init script ensures that the process is correctly managed and responds to signals and user commands.
+
+**Note:**
+
+This init script may not handle cases where it checks if a process is already running, and it will create a new process instead of indicating that it's already started. It is intended for illustrative purposes to manage a background process and PID file effectively.
+---
+
+
+---
+
+##Task 11 Documentation: Creating Zombie Processes
+================================================================
+
+**Description:**
+
+In Task 11, you are required to write a C program that creates five zombie processes and displays messages for each created zombie process. Zombie processes are child processes that have terminated but have not yet been reaped by their parent.
+
+**Implementation:**
+
+The C program, `102-zombie.c`, creates zombie processes as follows:
+
+1. It forks five child processes.
+2. For each child process, it displays the message "Zombie process created, PID: ZOMBIE_PID," where ZOMBIE_PID is the PID of the child process.
+3. After forking all child processes, the program enters an infinite loop using the `infinite_while` function, effectively preventing it from terminating.
+
+**Usage:**
+
+To use the program, follow these steps:
+
+1. Compile the C program using `gcc 102-zombie.c -o zombie`.
+2. Execute the program with `./zombie`.
+
+**Example Usage:**
+
+```bash
+sylvain@ubuntu$ gcc 102-zombie.c -o zombie
+sylvain@ubuntu$ ./zombie 
+Zombie process created, PID: 13527
+Zombie process created, PID: 13528
+Zombie process created, PID: 13529
+Zombie process created, PID: 13530
+Zombie process created, PID: 13531
+^C
+sylvain@ubuntu$
+```
+
+In this example, we compile the program and run it. It creates five zombie processes and displays the corresponding messages. The program enters an infinite loop until you manually terminate it.
+
+**Checking for Zombie Processes:**
+
+After running the program, you can check for zombie processes in a separate terminal using the `ps` command. Look for lines containing `[zombie] <defunct>`:
+
+```bash
+sylvain@ubuntu$ ps aux | grep -e 'Z+.*<defunct>'
+sylvain  13527  0.0  0.0      0     0 pts/0    Z+   01:19   0:00 [zombie] <defunct>
+sylvain  13528  0.0  0.0      0     0 pts/0    Z+   01:19   0:00 [zombie] <defunct>
+sylvain  13529  0.0  0.0      0     0 pts/0    Z+   01:19   0:00 [zombie] <defunct>
+sylvain  13530  0.0  0.0      0     0 pts/0    Z+   01:19   0:00 [zombie] <defunct>
+sylvain  13531  0.0  0.0      0     0 pts/0    Z+   01:19   0:00 [zombie] <defunct>
+sylvain  13533  0.0  0.1  10460   964 pts/2    S+   01:19   0:00 grep --color=auto -e Z+.*<defunct>
+sylvain@ubuntu$
+```
+
+In Terminal #1, the `ps` command is used to list processes, and `grep` filters for lines containing `[zombie] <defunct>`, which indicates the presence of zombie processes.
+
+This task demonstrates how zombie processes are created and how to identify them using system commands.
+---
