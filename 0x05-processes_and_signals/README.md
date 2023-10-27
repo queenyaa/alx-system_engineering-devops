@@ -239,4 +239,67 @@ Task 3 demonstrates how to create a Bash script that efficiently identifies and 
 ---
 
 
+---
+
+# Task 4: Bash Script to Display "To Infinity and Beyond" Indefinitely
+=========================================================================
+
+## Introduction
+
+Task 4 involves creating a Bash script that displays the message "To infinity and beyond" indefinitely, with a 2-second delay between each iteration. The script essentially creates a loop that continuously prints the specified message and adds a pause to control the timing between each display.
+
+## Script Description
+
+The Bash script for this task, named `4-to_infinity_and_beyond`, performs the following:
+
+1. It uses a `while` loop with the condition `true` to create an infinite loop. The loop will run indefinitely until manually stopped.
+
+2. Inside the loop, it uses the `echo` command to print the message "To infinity and beyond."
+
+3. After displaying the message, it introduces a 2-second delay using the `sleep` command, as specified in the requirements. This pause adds a 2-second wait before the next iteration of the loop.
+
+4. The loop continues to execute, repeating the message and the delay between each iteration.
+
+## Usage
+
+To use the script to display "To infinity and beyond" indefinitely with a 2-second delay, follow these steps:
+
+1. Open a terminal on your system.
+
+2. Make sure the script file (`4-to_infinity_and_beyond`) is in the current directory.
+
+3. Ensure the script file is executable by running the following command:
+   ```bash
+   chmod +x 4-to_infinity_and_beyond
+   ```
+
+4. Execute the script using the following command:
+   ```bash
+   ./4-to_infinity_and_beyond
+   ```
+
+5. The script will display the message "To infinity and beyond" indefinitely, with a 2-second pause between each display.
+
+## Example
+
+```shell
+sylvain@ubuntu$ ./4-to_infinity_and_beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+^C
+sylvain@ubuntu$
+```
+
+In this example, the script was executed, and it continuously displayed the message "To infinity and beyond," with a 2-second delay between each iteration. The script can be manually stopped by pressing Ctrl+C, as shown in the example.
+
+## Conclusion
+
+Task 4 demonstrates how to create a Bash script that performs an action repeatedly in an infinite loop while introducing timing delays between iterations. This script provides a simple way to execute a task with controlled timing.
+
+---
+
+
 
