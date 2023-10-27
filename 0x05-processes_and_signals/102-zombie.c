@@ -4,7 +4,8 @@
 
 /**
  * infinite_while - creates five zombie processes and displays
- * messages for each one:
+ * messages for each one
+ * Return: nothing
  */
 int infinite_while(void)
 {
@@ -17,6 +18,7 @@ int infinite_while(void)
 
 /**
  * main - main Entry
+ * Return: infinity
  */
 int main(void)
 {
