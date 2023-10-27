@@ -302,4 +302,64 @@ Task 4 demonstrates how to create a Bash script that performs an action repeated
 ---
 
 
+---
+
+# Task 5: Bash Script to Stop the "4-to_infinity_and_beyond" Process
+=========================================================================
+
+## Introduction
+
+In Task 5, the goal is to create a Bash script that stops the "4-to-infinity-and-beyond" process using the `kill` command. This script allows for the termination of a specific process by finding its Process ID (PID) and issuing a `kill` command to end it gracefully.
+
+## Script Description
+
+The Bash script for this task, named `5-stop_to_infinity_and_beyond`, accomplishes the following:
+
+1. It uses the `pgrep` command with the `-f` option to find the PID of the "4-to-infinity-and-beyond" process. The `-f` option allows for searching using the full command line.
+
+2. It checks if a valid PID was found. If a PID is found, it means that the "4-to-infinity-and-beyond" process is running.
+
+3. If a valid PID is found, it prints a message indicating the termination of the process and uses the `kill` command to gracefully terminate it.
+
+4. If a valid PID is not found, it displays a message indicating that the "4-to-infinity-and-beyond" process was not found.
+
+This script provides a way to stop a specific process gracefully using the `kill` command.
+
+## Usage
+
+To use the script to stop the "4-to-infinity-and-beyond" process, follow these steps:
+
+1. Open a terminal on your system.
+
+2. Make sure the script file (`5-stop_to_infinity_and_beyond`) is in the current directory.
+
+3. Ensure the script file is executable by running the following command:
+   ```bash
+   chmod +x 5-stop_to_infinity_and_beyond
+   ```
+
+4. Execute the script using the following command. Make sure the "4-to-infinity-and-beyond" process is running before running this script.
+   ```bash
+   ./5-stop_to_infinity_and_beyond
+   ```
+
+5. The script will attempt to find and terminate the "4-to-infinity-and-beyond" process.
+
+## Example
+
+```shell
+sylvain@ubuntu$ ./5-stop_to_infinity_and_beyond
+Terminating 4-to-infinity-and-beyond process with PID 12345
+sylvain@ubuntu$
+```
+
+In this example, the script successfully found the "4-to-infinity-and-beyond" process, terminated it gracefully, and displayed a message indicating the process termination. The PID 12345 is used for illustration purposes.
+
+## Conclusion
+
+Task 5 demonstrates how to create a Bash script that can find and stop a specific process using the `kill` command. This script provides a method to gracefully terminate a process when needed.
+
+---
+
+
 
