@@ -115,6 +115,68 @@ In this example, the script was executed, and it displayed a user-oriented list 
 ## Conclusion
 
 Task 1 demonstrates how to create a Bash script that provides a comprehensive and user-friendly view of the currently running processes on an Ubuntu 20.04 LTS system. The script adheres to the specified requirements and offers valuable insights into the running processes, their users, and relationships.
+---
 
+
+---
+
+# Task 2: Bash Script to Display Bash Process Lines and Extract PID
+==========================================================================
+
+## Introduction
+
+Task 2 involves creating a Bash script that can display lines containing the word "bash" and extract the Process ID (PID) of your Bash process. This script will help you easily identify the PID of your running Bash instance, without using the `pgrep` command. The `pgrep` command is typically used to find process IDs, but this task requires an alternative method.
+
+## Script Description
+
+The Bash script for this task, named `2-show_your_bash_pid`, performs the following actions:
+
+1. It uses the `ps` command to list all processes running on the system.
+
+2. It pipes the output of `ps aux` into a series of `grep` commands to filter lines that contain the word "bash." This step is crucial in identifying the Bash processes.
+
+3. It then uses `grep -v grep` to eliminate the `grep` process itself from the output.
+
+4. The result is a list of lines that contain the word "bash," and these lines typically represent Bash processes running on the system.
+
+## Usage
+
+To use the script to display lines containing the word "bash" and extract your Bash process's PID, follow these steps:
+
+1. Open a terminal on your system.
+
+2. Make sure the script file (`2-show_your_bash_pid`) is in the current directory.
+
+3. Ensure the script file is executable by running the following command:
+   ```bash
+   chmod +x 2-show_your_bash_pid
+   ```
+
+4. Execute the script using the following command:
+   ```bash
+   ./2-show_your_bash_pid
+   ```
+
+5. The script will display lines containing the word "bash," and you can identify your running Bash process by looking at the PID.
+
+## Example
+
+```shell
+sylvain@ubuntu$ ./2-show_your_bash_pid
+sylvain   4404  0.0  0.7  21432  4000 pts/0    Ss   03:32   0:00          \_ -bash
+sylvain   4477  0.0  0.2  11120  1352 pts/0    S+   03:40   0:00              \_ bash ./2-show_your_bash_pid
+sylvain   4479  0.0  0.1  10460   912 pts/0    S+   03:40   0:00                  \_ grep bash
+sylvain@ubuntu$
+```
+
+In this example, the script was executed, and it displayed lines containing the word "bash." The PID of your Bash process can be identified in the output. In this case, the Bash process has the PID 4404.
+
+## Conclusion
+
+Task 2 demonstrates how to create a Bash script that extracts the PID of a Bash process without using the `pgrep` command. It provides a simple and effective way to identify and locate your running Bash instance among the list of processes.
+---
+
+
+---
 
 
