@@ -179,4 +179,64 @@ Task 2 demonstrates how to create a Bash script that extracts the PID of a Bash 
 
 ---
 
+# Task 3: Bash Script to Display PIDs and Process Names for "bash" Processes
+=============================================================================
+
+## Introduction
+
+In Task 3, we are tasked with creating a Bash script that displays the Process IDs (PIDs) and process names for processes whose names contain the word "bash." This script provides a way to identify and list specific processes running on the system based on their names.
+
+## Script Description
+
+The Bash script for this task, named `3-show_your_bash_pid_made_easy`, accomplishes the following:
+
+1. It obtains a list of process PIDs by inspecting the `/proc` directory, where information about running processes is stored.
+
+2. It iterates through the list of process PIDs and for each PID:
+
+   - It reads the process's command-line by examining the `/proc/PID/cmdline` file.
+   - It extracts the process name from the command-line.
+   - It checks if the process name contains the word "bash."
+   - If the process name contains "bash" and is not empty, it displays the PID and process name.
+
+This script provides an efficient and direct method to list the PIDs and process names for processes containing the word "bash" in their names.
+
+## Usage
+
+To use the script to display the PIDs and process names of "bash" processes, follow these steps:
+
+1. Open a terminal on your system.
+
+2. Make sure the script file (`3-show_your_bash_pid_made_easy`) is in the current directory.
+
+3. Ensure the script file is executable by running the following command:
+   ```bash
+   chmod +x 3-show_your_bash_pid_made_easy
+   ```
+
+4. Execute the script using the following command:
+   ```bash
+   ./3-show_your_bash_pid_made_easy
+   ```
+
+5. The script will display the PIDs and process names of processes whose names contain the word "bash."
+
+## Example
+
+```shell
+sylvain@ubuntu$ ./3-show_your_bash_pid_made_easy
+4404 bash
+4555 bash
+sylvain@ubuntu$
+```
+
+In this example, the script was executed, and it displayed the PIDs and process names of processes containing the word "bash" in their names. In the output, you can see the PIDs and process names associated with "bash" processes.
+
+## Conclusion
+
+Task 3 demonstrates how to create a Bash script that efficiently identifies and lists the PIDs and process names of processes based on their names. This script adheres to the task's requirements and provides a convenient way to work with specific processes.
+
+---
+
+
 
