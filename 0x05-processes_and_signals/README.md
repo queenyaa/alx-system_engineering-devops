@@ -422,4 +422,58 @@ Task 6 demonstrates how to create a Bash script that can find and stop a specifi
 
 ---
 
+##Task 7 Documentation: "To Infinity and Beyond" with Signal Handling
+=========================================================================
+
+**Description:**
+
+Task 7 involves creating a Bash script, named `7-highlander`, that displays the message "To infinity and beyond" indefinitely with a 2-second sleep between each iteration. Additionally, it should respond to the SIGTERM signal with the message "I am invincible!!!."
+
+**Script Implementation:**
+
+Here is the implementation of the `7-highlander` script:
+
+```bash
+#!/usr/bin/env bash
+# This script displays "To infinity and beyond" with a sleep of 2 seconds between each iteration.
+# It reacts to the SIGTERM signal with the message "I am invincible!!!"
+
+# Function to handle the SIGTERM signal
+handle_sigterm() {
+  echo "I am invincible!!!"
+  exit
+}
+
+# Set up the trap for SIGTERM
+trap 'handle_sigterm' SIGTERM
+
+# Continuously run the script
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+done
+```
+
+**Script Features:**
+
+1. The script uses the `trap` command to set up a handler for the SIGTERM signal (`SIGTERM`). When a SIGTERM signal is received (e.g., via Ctrl+C), the script will execute the `handle_sigterm` function and display "I am invincible!!!" before exiting.
+
+2. Inside the main loop, the script continuously prints "To infinity and beyond" with a 2-second sleep between each iteration.
+
+**Running the Script:**
+
+To use the script, follow these steps:
+
+1. Save the script to a file named `7-highlander`.
+2. Make the script executable by running `chmod +x 7-highlander`.
+3. Execute the script by running `./7-highlander`.
+
+When running the script, it will display the desired messages and respond to the SIGTERM signal as described.
+
+**Note:**
+
+If the script doesn't handle the signal as expected in your environment, please ensure that your terminal and shell are configured correctly for signal handling. The behavior of signals can vary between different environments and configurations.
+---
+
 
