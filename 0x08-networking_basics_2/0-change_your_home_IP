@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # define the new IP addresses for localhost and facebook.com
 
 cp /etc/hosts ~/hosts.new
