@@ -2,7 +2,7 @@
 # using Puppet to make changes to configuration file
 
 augeas { 'ssh_config':
-  context => '/etc/ssh/ssh_config',
+  context => '/files/etc/ssh/ssh_config',
   changes => [
     'set Host/* SendEnv LANG LC_*',
     'set Host/* HashKnownHosts yes',
@@ -11,4 +11,8 @@ augeas { 'ssh_config':
     'set Host/* IdentityFile ~/.ssh/school',
     'set Host/* PasswordAuthentication no',
   ],
+ }
+
+notify { 'Notice: Turn off passwd auth ensure: created':
+  require => Augeas['ssh_config'],
  }
