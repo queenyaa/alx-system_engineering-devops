@@ -1,13 +1,25 @@
 # Puppet manifest file to install a package
 
-$packages = [ 'python3', 'python3-pip' ]
-
-package { $packages:
-  ensure => 'installed',
+# Install python
+package { 'python3.8':
+  ensure => present,
 }
 
+# pip
+package { 'python3-pip':
+  ensure => present,
+}
+
+# flask
 package { 'Flask':
   ensure   => '2.1.0',
-  provider => 'pip3',
-  require  => Package['python3-pip']
+  provider => 'pip',
+  require  => Package['python3-pip'],
+}
+
+# werkzeug
+package { 'werkzeug':
+  ensure => '2.1.1',
+  provider => 'pip',
+  require => Package['python3-pip'],
 }
