@@ -1,18 +1,11 @@
-#!/usr/bin/env bash
-# using Puppet to make changes to configuration file
+# ssh configuration with Puppet
 
-augeas { 'ssh_config':
+augeas { 'ssh_config_password_auth':
   context => '/files/etc/ssh/ssh_config',
-  changes => [
-    'set Host/* SendEnv LANG LC_*',
-    'set Host/* HashKnownHosts yes',
-    'set Host/* GSSAPIAuthentication yes',
-    'set Host/* GSSAPIDelegateCredentials no',
-    'set Host/* IdentityFile ~/.ssh/school',
-    'set Host/* PasswordAuthentication no',
-  ],
- }
+  changes => ['set Host[1]/PasswordAuthentication no'],
+}
 
-notify { 'Notice: Turn off passwd auth ensure: created':
-  require => Augeas['ssh_config'],
- }
+augeas { 'ssh_config_identity_file':
+  context => '/files/etc/ssh/ssh_config',
+  changes => ['set Host[1]/IdentityFile ~/.ssh/school'],
+}
