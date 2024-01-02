@@ -1,16 +1,32 @@
 # ssh configuration with Puppet
 
-file { '/home/ubuntu/.ssh/':
-  ensure => directory,
-}
+include stdlib
 
-file { '/home/ubuntu/.ssh/config':
+file_line { 'Turn off passwd auth':
   ensure  => present,
-  content => "Host *\n
-               IdentityFile ~/.ssh/school\n
-               PasswordAuthentication no\n",
+  path    => '/etc/ssh/ssh_config',
+  line    => '    PasswordAuthentication no',
   replace => true,
 }
+
+file_line { 'Declare identity file':
+  ensure  => present,
+  path    => '/etc/ssh/ssh_config',
+  line    => '    IdentityFile ~/.ssh/school',
+  replace => true,
+}
+
+# file { '/home/ubuntu/.ssh/':
+  # ensure => directory,
+# }
+
+# file { '/home/ubuntu/.ssh/config':
+  # ensure  => present,
+  # content => "Host *\n
+               # IdentityFile ~/.ssh/school\n
+               # PasswordAuthentication no\n",
+  # replace => true,
+# }
 
 # augeas { 'ssh_config_password_auth':
   # context => '/files/etc/ssh/ssh_config',
