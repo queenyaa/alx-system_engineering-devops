@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Run Apache2 on the Docker Container
+apt-get update -y
+apt-get upgrade -y
+apt-get install apache2 -y
+echo "Holberton School" > /var/www/html/index.html
+echo "HttpProtocolOptions Unsage" >> /etc/apache2/apache2.conf
+service apache2 restart
