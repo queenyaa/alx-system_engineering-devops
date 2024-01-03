@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 # Update the package lists
-apt-get update -y
+apt-get -y update
 
 # Install nginx
-apt-get install nginx -y
+apt-get -y install nginx
 
 # Make sure nginx is running
-service nginx start
+# service nginx start
 
 # Create a simple HTML page with "Hello World!:
 echo "Hello World!" > /var/www/html/index.html
 
 # Restart nginx (using the -y option to avoid prompts)
-service nginx restart -y
+service nginx start
