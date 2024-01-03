@@ -13,4 +13,4 @@ apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
 
 # Restart nginx (using the -y option to avoid prompts)
-service nginx start
+service nginx restart
