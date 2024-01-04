@@ -10,9 +10,9 @@ if [ -f "$ports_conf" ]; then
 	sudo service apache2 restart
 fi
 echo "Holberton School" > /var/www/html/index.html
-echo "HttpProtocolOptions Usage" >> /etc/apache2/apache2.conf
+echo "HttpProtocolOptions Unsafe" >> /etc/apache2/apache2.conf
 
-sudo service apache2 status &> /dev/null
-if [ $? -eq 0 ]; then
+# sudo service apache2 status &> /dev/null
+if sudo service apache2 status &> /dev/null; then
 	sudo service apache2 restart
 fi
