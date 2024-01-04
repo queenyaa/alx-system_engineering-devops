@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 # Run Apache2 on the Docker Container
-apt-get update -y
-apt-get upgrade -y
-apt-get install apache2 -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install apache2 -y
+ports_conf="/etc/apache2/ports.conf"
+new_port=8080
+if [ -f "$ports_conf" ]; then
+	sudo sed -i "s/Listen 80/Listen $new_port/" "$ports_conf"
+	sudo service apache2 restart
+fi
 echo "Holberton School" > /var/www/html/index.html
-echo "HttpProtocolOptions Unsage" >> /etc/apache2/apache2.conf
-service apache2 restart
+echo "HttpProtocolOptions Usage" >> /etc/apache2/apache2.conf
+
+sudo service apache2 status &> /dev/null
+if [ $? -eq 0 ]; then
+	sudo service apache2 restart
+fi
