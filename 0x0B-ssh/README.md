@@ -1,8 +1,6 @@
 # Readme of 0x0B-ssh
 =============================
 
-Certainly! Let's summarize the tasks and their relevance:
-
 ### Task 0:
 **Objective:** Write a Bash script using `ssh` to connect to a server with a private key.
 
