@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Script configures Nginx on a new Ubuntu maachine to include custom
+# HTTP response
+
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y nginx
+
+# Create the index.html with "Hello World!" page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# configure Nginx to include the custom HTTP response header
+sudo sed -i "/server_name _/a add_header X-Server-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+# Personalized 301 page
+new_add="server_name_;\n\trewrite ^\/redirect_me https:\/\/github.com\/queenyaa permanent;"
+sudo sed -i "s/server_name;/$new_add/" /etc/nginx/sites-enabled/default
+
+# Personalized 404 Page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+n_add="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$n_add/" /etc/nginx/sites-enabled/default
+
+# Check for configuration errors
+sudo nginx -t
+
+# Restart Nginx
+sudo service nginx restart
