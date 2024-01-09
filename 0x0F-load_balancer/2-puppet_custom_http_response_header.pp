@@ -15,15 +15,12 @@ file { '/etc/nginx/sites-enabled/default':
   notify  => Service['nginx'],
 }
 
-# Personalized 301 page
-file_line { 'redirect_me':
-  ensure => 'present',
-  path   => '/etc/nginx/sites-enabled/default',
-  after  => 'listen 80 default_server;',
-  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-}
-
 service { 'nginx':
   ensure  => running,
   require => Package['nginx'],
 }
+
+# Custom fact to get the hostname
+Facter.add('custom_hostname') do
+  setcode 'hostname'
+end
