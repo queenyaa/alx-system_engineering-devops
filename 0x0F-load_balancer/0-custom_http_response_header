@@ -10,10 +10,10 @@ sudo apt-get install -y nginx
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # configure Nginx to include the custom HTTP response header
-sudo sed -i "/server_name _/a add_header X-Served-By: $HOSTNAME;" /etc/nginx/sites-enabled/default
+sudo sed -i "53i /server_name _/a add_header X-Served-By: $HOSTNAME;" /etc/nginx/sites-enabled/default
 
 # Personalized 301 page
-new_add="server_name_;\n\trewrite ^\/redirect_me https:\/\/github.com\/queenyaa permanent;"
+new_add="\n\trewrite ^\/redirect_me https:\/\/github.com\/queenyaa permanent;"
 sudo sed -i "s/server_name;/$new_add/" /etc/nginx/sites-enabled/default
 
 # Personalized 404 Page
