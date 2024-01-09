@@ -8,19 +8,15 @@ file { '/var/www/html/index.html':
   content => 'Hello World!',
 }
 
-file { '/etc/nginx/sites-enabled/default':
-  ensure  => 'file',
-  content => template('nginx/default.erb'),
-  require => Class['nginx'],
-  notify  => Service['nginx'],
+exec { 'command':
+  command => 'sed -i "51i \\\tadd_header X-Served-By: $HOSTNAME;" /etc/nginx/sites-enabled/default && service nginx restart',
+  provider => shell,
+  path => '/usr/bin:/bin', # Set the PATH to include binaries
+  unless => 'grep -q "add_header X-Served-By: $HOSTNAME;" /etc/nginx/sites-enabled/default',
+  require => Package['nginx'],
 }
 
 service { 'nginx':
   ensure  => running,
   require => Package['nginx'],
 }
-
-# Custom fact to get the hostname
-Facter.add('custom_hostname') do
-  setcode 'hostname'
-end
