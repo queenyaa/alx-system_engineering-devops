@@ -4,10 +4,11 @@
 display_info() {
     sub_dom=$1
     domain=$2
-    res=$(dig +short $sub_dom.$domain)
-    rec_tp=$(dig $sub_dom.$domain | awk '/ANSWER SECTION/ {getline; print $4}')
-    dest=$(dig $sub_dom.$domain | awk '/ANSWER SECTION/ {getline; print $5}')
-    ttl=$(dig $sub_dom.$domain | awk '/ANSWER SECTION/ {getline; print $2}')
+    # res=$(dig +short $sub_dom.$domain)
+    rec_tp=$(dig "$sub_dom"."$domain" | awk '/ANSWER SECTION/ {getline; print $4}')
+    dest=$(dig "$sub_dom"."$domain" | awk '/ANSWER SECTION/ {getline; print $5}')
+    # shellcheck disable=SC2034
+    ttl=$(dig "$sub_dom"."$domain" | awk '/ANSWER SECTION/ {getline; print $2}')
     echo "The subdomain $sub_dom is a $rec_tp record and points to $dest"
 }
 
