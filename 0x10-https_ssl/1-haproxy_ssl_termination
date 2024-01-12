@@ -42,7 +42,7 @@ frontend ysgyan_front
         default_backend ysgyan_back
 
 frontend ysgyan_front_https
-        bind *:443 ssl crt /etc/letsencrypt/live/www.ysgyan.tech/privfull.pem
+        bind *:443 ssl crt /etc/ssl/ysgyan.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend ysgyan_back
 
