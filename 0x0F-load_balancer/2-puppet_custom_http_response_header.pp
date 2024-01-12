@@ -1,22 +1,26 @@
 # Puppet script to install Nginx server
 
+exec { 'update system':
+  command => '/usr/bin/apt-get update'
+}
+
 package { 'nginx':
-  ensure => 'installed'
+  ensure  => 'installed',
+  require => Exec['update system']
 }
 
 file { '/var/www/html/index.html':
-  content => 'Hello World!',
+  content => 'Hello World!'
 }
 
-exec { 'command':
+exec { 'HTTP header':
   command  => 'sed -i "51i \\\tadd_header X-Served-By: $HOSTNAME;" /etc/nginx/sites-enabled/default && service nginx restart',
-  provider => shell,
+  provider => 'shell',
   path     => '/usr/bin:/bin', # Set the PATH to include binaries
-  unless   => 'grep -q "add_header X-Served-By: $HOSTNAME;" /etc/nginx/sites-enabled/default',
-  require  => Package['nginx'],
+  require  => Package['nginx']
 }
 
 service { 'nginx':
   ensure  => running,
-  require => Package['nginx'],
+  require => Package['nginx']
 }
