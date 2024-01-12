@@ -4,21 +4,23 @@
 display_info() {
 	sub_dom=$1
 	domain=$2
-	rec_tp=$(dig $sub_dom.$domain | awk '/ANSWER SECTION/ {print $4}')
-	dest=$(dig $sub_domain.$domain | awk '/ANSWER SECTION/ {getline; print $5}')
-	echo "The subdomain $sub_dom is a $rec_tp record and points to $dest"
+	res=$(dig $sub_dom.$domain | awk '/ANSWER SECTION/ {getline; print}')
+	rec_tp=$(echo $res | awk '{print $4}')
+	dest=$(echo $res | awk '{print $5}')
+	ttl=$(echo $res | awk '{print $2}')
+	echo "The subdomain $sub_dom is a $rec_tp record with TTL $ttl seconds and points to $dest"
 }
 
 # Main script
 if [ "$#" -eq 1 ]; then
 	# Display info for default subdomains www, web-01, web-02
-	display_info www $1
-	display_info lb-01 $1
-	display_info web-01 $1
-	display_info web-02 $1
+	display_info "www.$1" "www"
+	display_info "lb-01.$1" "lb-01"
+	display_info "web-01.$1" "web-01"
+	display_info "web-02.$1" "web-02"
 elif [ "$#" -eq 2 ]; then
 	# Display info for the specified subdomain
-	display_info $2 $1
+	display_info "$2.$1" "$2"
 else
 	echo "Usage: $0 <domain> [subdomain]"
 	exit 1
