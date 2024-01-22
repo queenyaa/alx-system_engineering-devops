@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# script that configures the container to run Nginx as the nginx user
+# give conf permission
+chmod 644 /etc/nginx/nginx.conf
+# update nginx.conf
+sed -Ei "s/\s*#?\s*user .*/user nginx;/" /etc/nginx/nginx.conf
+# update default site config
+sed -Ei "s/(listen (\[::];)?80) /\180 /" /etc/nginx/sites-enabled/default
+# switch user
+su nginx -s /bin/bash -c 'service nginx restart'
