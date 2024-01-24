@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Script to back up databases
+
+# Current date formatted as day-month-year
+curr_date=$(date '+%d-%m-%Y')
+# MySQL dump file name
+mysql_dfile="backup.sql"
+# Compressed archive name
+arch_n="$curr_date.tar.gz"
+
+# Perform MySQL dump
+mysqldump -u root -p"$1" --all-databases > "$mysql_dfile"
+tar -czvf "$arch_n" "$mysql_dfile"
