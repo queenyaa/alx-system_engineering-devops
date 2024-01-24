@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # script that configures the container to run Nginx as the nginx user
 # give conf permission
-# set -x
+set -x
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install -y nginx
@@ -18,5 +18,5 @@ sudo sed -Ei "s/\s*#?\s*user .*/user nginx;/" /etc/nginx/nginx.conf
 # sudo chown nginx:nginx /run/nginx.pid
 
 sudo sed -i "s/\(listen\s*\)80/\18080/" "$ch_portconf"
-sudo sed -Ei "s/(listen (\[::\]:?80))/\180 /" "$ch_portconf"
-sudo -u nginx service nginx restart
+sudo sed -Ei "s/(listen (\[::\]:?80))/\180/" "$ch_portconf"
+sudo service nginx restart
