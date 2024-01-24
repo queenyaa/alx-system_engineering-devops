@@ -168,4 +168,66 @@ Overall, Task 3 is a preparatory step that sets up the foundation for the subseq
 ---
 ## task 4
 ---
+Yes, when setting up MySQL replication, the database and tables on the primary server (web-01) need to be created on the replica server (web-02). The replica_user is used to grant the necessary permissions to replicate data from the primary server to the replica server.
+
+Here are the steps involved in the replication setup:
+
+1. **Create Database and Tables on Primary Server (web-01):**
+   - Create the `tyrel_corp` database and the `nexus6` table on web-01.
+
+2. **Create Replica User on Primary Server (web-01):**
+   - Create the `replica_user` on web-01 with the necessary replication privileges.
+
+3. **Set Up Replication Configuration on Replica Server (web-02):**
+   - Create the `tyrel_corp` database on web-02 (replica).
+   - Create the `nexus6` table within the `tyrel_corp` database on web-02, using the same schema as on web-01.
+   - Configure replication on web-02 using the `replica_user` credentials and specify the master log file and position.
+
+4. **Start Replication on Replica Server (web-02):**
+   - Start the replication process on web-02.
+
+The replica_user is used for authentication when the replica server connects to the primary server to fetch the changes (binlog events). The database and tables must exist on the replica server to receive and apply these changes.
+
+It's important to ensure that the schema and data on the replica server match those on the primary server to maintain consistency.
+
+If you haven't created the `tyrel_corp` database and the `nexus6` table on web-02, you should do so before restarting the replication process.
+
+---
+Task 4 involves setting up MySQL database replication between a primary server (web-01) and a replica server (web-02). Here's a summary:
+
+1. **Primary and Replica Servers:**
+   - The primary MySQL server must be hosted on web-01.
+   - The replica MySQL server must be hosted on web-02.
+
+2. **Database Replication:**
+   - Set up replication for the MySQL database named `tyrell_corp`.
+   - This involves configuring the primary server to replicate its data to the replica server.
+
+3. **Configuration Files:**
+   - Provide the MySQL primary configuration as an answer file named `4-mysql_configuration_primary`.
+   - Provide the MySQL replica configuration as an answer file named `4-mysql_configuration_replica`.
+
+4. **Advantages of Database Replication:**
+   - **Redundancy:** In case one server fails, there's another working server with a copy of the data.
+   - **Load Distribution:** Read operations can be split between the primary and replica servers, reducing the load on the primary server and improving query response speed.
+
+5. **Testing Replication:**
+   - After setting up replication, add a new record in the table via MySQL on web-01.
+   - Check if the record has been replicated to MySQL on web-02. If successful, replication is working.
+
+6. **Port 3306:**
+   - Ensure that UFW (Uncomplicated Firewall) allows connections on port 3306 (default MySQL port).
+   - This is crucial for the communication between the primary and replica servers.
+
+**Importance of Setting Port 3306:**
+   - Port 3306 is the default port for MySQL, and allowing connections on this port is essential for MySQL replication to function.
+   - It enables the servers to communicate and synchronize data effectively.
+   - Restricting or blocking port 3306 could lead to replication failures, hindering the redundancy and load distribution benefits.
+
+In summary, Task 4 establishes a reliable and redundant MySQL database setup with replication between web-01 and web-02, enhancing data availability and optimizing server performance. Setting port 3306 is critical for the communication necessary for successful replication.
+---
+
+---
+## Task 5
+---
 
