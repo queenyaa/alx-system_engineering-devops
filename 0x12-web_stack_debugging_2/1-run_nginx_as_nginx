@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -x
 # script that configures the container to run Nginx as the nginx user
 # give conf permission
+# set -x
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install -y nginx
