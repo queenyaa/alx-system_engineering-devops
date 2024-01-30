@@ -29,7 +29,8 @@ if __name__ == "__main__":
         # Extracting relevant info
         employee_n = user_data.get('name', 'Unknown Employee')
         total_tasks = len(tasks_data)
-        completed_tasks = [task for task in tasks_data if task['completed']]
+        completed_tasks = [task['title'] for task in tasks_data
+                           if task['completed']]
         num_comp_tasks = len(completed_tasks)
 
         # Displaying info
@@ -37,12 +38,8 @@ if __name__ == "__main__":
               employee_n, num_comp_tasks, total_tasks))
 
         # Displaying completed task titles
-        for task in completed_tasks:
-            print("\t{}".format(task['title']))
-
-        # Displaying completed task titles
-        for task in completed_tasks:
-            print("\t{}".format(task['title']))
+        for task_t in completed_tasks:
+            print("\t{}".format(task_t))
 
     except requests.RequestException as e:
         print("Error fetching data:", str(e))
