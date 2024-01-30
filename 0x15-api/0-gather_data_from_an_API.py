@@ -8,6 +8,20 @@ import requests
 from sys import argv
 
 
+def fetch_data(employee_id):
+    user_url = 'https://jsonplaceholder.typicode.com/users/{}'
+    res = requests.get(user_url.format(employee_id))
+    res.raise_for_status()
+    return (res.json().get('name'))
+
+
+def fetch_todo(employee_id):
+    tasks_url = 'https://jsonplaceholder.typicode.com/users/{}/todos'
+    res = requests.get(tasks_url.format(employee_id))
+    res.raise_for_status()
+    return (res.json())
+
+
 if __name__ == "__main__":
     if len(argv) != 2 or not argv[1].isdigit():
         print("Usage: {} <employee_id>".format(argv[0]))
@@ -15,31 +29,24 @@ if __name__ == "__main__":
 
     employee_id = int(argv[1])
 
-    # fetch data
-    user_url = 'https://jsonplaceholder.typicode.com/users/{}'
-    tasks_url = 'https://jsonplaceholder.typicode.com/todos?userId={}'
-
     try:
-        user_res = requests.get(user_url.format(employee_id))
-        task_res = requests.get(tasks_url.format(employee_id))
+        employee_name = fetch_data(employee_id)
+        tasks = fetch_todo(employee_id)
 
-        user_data = user_res.json()
-        tasks_data = task_res.json()
+        done = 0
+        done_tasks = []
 
         # Extracting relevant info
-        employee_n = user_data.get('name', 'Unknown Employee')
-        total_tasks = len(tasks_data)
-        completed_tasks = [task['title'] for task in tasks_data
-                           if task['completed']]
-        num_comp_tasks = len(completed_tasks)
+        for task in tasks:
+            if task.get('completed'):
+                done_tasks.append(task)
+                done += 1
 
-        # Displaying info
-        print("Employee {} is done with tasks({}/{}):".format(
-              employee_n, num_comp_tasks, total_tasks))
+        print("Employee {} is done with tasks({}/{}):"
+              .format(employee_name, done, len(tasks)))
 
-        # Displaying completed task titles
-        for task_t in completed_tasks:
-            print("\t{}".format(task_t))
+        for task in done_tasks:
+            print("\t {}".format(task.get('title')))
 
     except requests.RequestException as e:
         print("Error fetching data:", str(e))
