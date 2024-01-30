@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # res_todo.raise_for_status()
 
     tasks = res_todo.json()
-    sorted_entries = sorted(tasks, key=lambda x: x['title'])
+    sorted_tasks = sorted(tasks, key=lambda x: x['title'])
     diction = {employee_id: []}
     for task in sorted_tasks:
         diction[employee_id].append({"task": task.get('title'),
