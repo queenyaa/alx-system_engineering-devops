@@ -33,6 +33,6 @@ if __name__ == '__main__':
     with open('{}.csv'.format(employee_id), 'w') as file:
         for task in tasks:
             file.write('"{}","{}","{}","{}"\n'.format(employee_id,
-                  user_n, task.get('completed'), task.get('title')))
+                       user_n, task.get('completed'), task.get('title')))
 
     # print("Data exported to {}.csv".format(employee_id))

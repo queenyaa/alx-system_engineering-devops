@@ -28,15 +28,15 @@ if __name__ == '__main__':
     # res_todo.raise_for_status()
 
     tasks = res_todo.json()
-
+    sorted_entries = sorted(tasks, key=lambda x: x['title'])
     diction = {employee_id: []}
-    for task in tasks:
+    for task in sorted_tasks:
         diction[employee_id].append({"task": task.get('title'),
                                     "completed": task.get('completed'),
                                      "username": user_n})
 
-    sorted_entries = sorted(diction[employee_id], key=lambda x: x['task'])
-    diction[employee_id] = sorted_entries
+    # sorted_entries = sorted(diction[employee_id], key=lambda x: x['task'])
+    # diction[employee_id] = sorted_entries
 
     with open('{}.json'.format(employee_id), 'w') as filename:
         json.dump(diction, filename)
