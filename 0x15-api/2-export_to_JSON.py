@@ -4,6 +4,7 @@ Accessing a REST API for todo lists of
 employees and exporting to CSV
 """
 
+from collections import OrderedDict
 import json
 import requests
 import sys
@@ -28,12 +29,13 @@ if __name__ == '__main__':
     # res_todo.raise_for_status()
 
     tasks = res_todo.json()
-    sorted_tasks = sorted(tasks, key=lambda x: x['title'])
-    diction = {employee_id: []}
-    for task in sorted_tasks:
-        diction[employee_id].append({"task": task.get('title'),
-                                    "completed": task.get('completed'),
-                                     "username": user_n})
+    # sorted_tasks = sorted(tasks, key=lambda x: x['title'])
+    diction = OrderedDict({employee_id: []})
+    for task in tasks:
+        diction[employee_id].append(OrderedDict({"task": task.get('title'),
+                                                 "completed":
+                                                 task.get('completed'),
+                                                 "username": user_n}))
 
     # sorted_entries = sorted(diction[employee_id], key=lambda x: x['task'])
     # diction[employee_id] = sorted_entries
