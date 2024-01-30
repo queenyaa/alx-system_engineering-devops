@@ -33,7 +33,10 @@ if __name__ == '__main__':
     for task in tasks:
         diction[employee_id].append({"task": task.get('title'),
                                     "completed": task.get('completed'),
-                                    "username": user_n
-                                    })
+                                     "username": user_n})
+
+    sorted_entries = sorted(diction[employee_id], key=lambda x: x['task'])
+    diction[employee_id] = sorted_entries
+
     with open('{}.json'.format(employee_id), 'w') as filename:
-              json.dump(diction, filename)
+        json.dump(diction, filename)
