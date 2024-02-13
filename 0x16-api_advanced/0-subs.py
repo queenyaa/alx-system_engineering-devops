@@ -20,7 +20,7 @@ def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     header = {
             'User-Agent': ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; '
-            'rv:122.0) Gecko/20100101 Firefox/122.0')}
+                           'rv:122.0) Gecko/20100101 Firefox/122.0')}
     response = requests.get(url, headers=header, allow_redirects=False)
     # print("Response status code:", response.status_code)
     # data = response.json()
