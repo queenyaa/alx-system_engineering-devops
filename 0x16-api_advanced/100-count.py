@@ -22,8 +22,8 @@ def count_words(subreddit, word_list, after=None, counts={}):
     if after is None:
         url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
     else:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
-
+        url = f"https://www.reddit.com/r/{subreddit}" \
+              f"/hot.json?limit=100&after={after}"
 
     headers = {'User-Agent': 'ysg'}
     response = requests.get(url, headers=headers, allow_redirects=False)

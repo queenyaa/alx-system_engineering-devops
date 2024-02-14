@@ -27,7 +27,6 @@ def top_ten(subreddit):
         print(None)
         return
 
-
     posts = data['data']['children']
     for post in posts:
         print(post['data']['title'])
