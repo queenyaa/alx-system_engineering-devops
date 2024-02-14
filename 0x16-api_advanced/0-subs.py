@@ -18,10 +18,8 @@ def number_of_subscribers(subreddit):
         int: the number of subscribers, or 0 if the subreddit is invalid
     """
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    header = {
-            'User-Agent': ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; '
-                           'rv:122.0) Gecko/20100101 Firefox/122.0')}
-    response = requests.get(url, headers=header, allow_redirects=False)
+    headers = {'User-Agent': 'ysg'}
+    response = requests.get(url, headers=headers, allow_redirects=False)
     # print("Response status code:", response.status_code)
     # data = response.json()
     if response.status_code >= 300:
