@@ -17,13 +17,19 @@ def number_of_subscribers(subreddit):
     Returns:
         int: the number of subscribers, or 0 if the subreddit is invalid
     """
+    subreddit = "programming"
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {'User-Agent': 'ysg'}
+    headers = {'User-Agent': '0-subs/1.0 (by /u/yaasgyan)'}
     response = requests.get(url, headers=headers, allow_redirects=False)
-    # print("Response status code:", response.status_code)
+    print("Response status code:", response.status_code)
     # data = response.json()
     if response.status_code >= 300:
         return (0)
-    json = response.json()
-    data_dict = json.get('data')
-    return(data_dict.get('subscribers'))
+    data = response.json()
+    data_dict = data.get('data', {}).get('subscribers', 0)
+    return(data_dict)
+
+
+if __name__ == "__main_":
+    subscribers = number_of_subscribers()
+    print(subscribers)
