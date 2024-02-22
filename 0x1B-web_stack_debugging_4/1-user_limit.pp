@@ -8,12 +8,7 @@ file { '/etc/security/limits.conf':
 }
 
 # Set the file descriptor limits using exec
-exec { 'set_hard':
-  command => "/bin/echo '$user hard nofile 10000' >> /etc/security/limits.conf",
-  unless  => "/bin/grep -q '^$user.*nofile.*hard.*$hard_limit' /etc/security/limits.conf",
-}
-
-exec { 'set_soft':
-  command => "/bin/echo '$user soft nofile 15000' >> /etc/security/limits.conf",
-  unless  => "/bin/grep -q '^$user.*nofile.*soft.*$soft_limit' /etc/security/limits.conf",
+exec { 'change-os-configuration-for-holberton-user':
+  command => "sed -i '/$user hard/s/5/10000/; /$user soft/s/4/15000/' /etc/security/limits.conf",
+  path    => '/usr/locla/bin/:/bin/'
 }
