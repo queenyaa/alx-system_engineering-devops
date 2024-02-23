@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Get the process ID of the Gunicorn master process
+main_pid=$(pgrep -f "gunicorn.*--workers")
+
+# Check if the main_pid variable is empty
+if [ -z "$main_pid" ]; then
+        exit 1
+fi
+
+# Send a terminal signal to the master process
+kill -s TERM "$main_pid"
