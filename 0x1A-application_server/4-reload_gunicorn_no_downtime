@@ -11,3 +11,5 @@ fi
 
 # Send a termination signal to the Gunicorn master process
 kill -s TERM "$main_pid"
+
+systemctl restart gunicorn.service
