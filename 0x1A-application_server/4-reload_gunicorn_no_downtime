@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 # Get the process ID of the Gunicorn master process
-main_pid=$(pgrep -f "gunicorn.*--workers")
+main_pid=$(pgrep -f '^[^ ]*/?gunicorn ')
 
 # Check if the main_pid variable is empty
 if [ -z "$main_pid" ]; then
+        echo "Error: PID file not found"
         exit 1
 fi
 
-# Send a terminal signal to the master process
+# Send a termination signal to the Gunicorn master process
 kill -s TERM "$main_pid"
